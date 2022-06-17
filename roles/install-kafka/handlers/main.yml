@@ -1,0 +1,12 @@
+- name: startzookeeper
+  systemd:
+    daemon_reload: yes
+    name: zookeeper.service
+    state: started
+
+
+- name: startkafka
+  systemd:
+    #daemon_reload: yes
+    name: kafka.service
+    state: started

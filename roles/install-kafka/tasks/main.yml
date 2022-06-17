@@ -1,0 +1,41 @@
+---
+# tasks file for teste
+
+- name: "Instalação do Java."
+  apt: 
+    name: openjdk-11-jre-headless
+    update_cache: yes
+
+- name: Unarchive a file that needs to be downloaded (added in 2.0)
+  ansible.builtin.unarchive:
+    src: https://dlcdn.apache.org/kafka/3.2.0/kafka_2.13-3.2.0.tgz
+    dest: /opt
+    remote_src: yes
+
+- name: create zookeeper.service
+  ansible.builtin.template:
+    src: zookeeper.service
+    dest: /etc/systemd/system/
+    owner: vagrant
+    group: admin
+    mode: '0777'
+  notify: startzookeeper
+
+- name: create kafka.service
+  ansible.builtin.template:
+    src: kafka.service
+    dest: /etc/systemd/system/
+    owner: vagrant
+    group: admin
+    mode: '0777'
+  notify: startkafka
+
+
+
+
+
+
+
+
+...
+      
